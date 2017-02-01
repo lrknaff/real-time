@@ -1,3 +1,4 @@
+
 $.get('/api/poll', function(data) {
   const { question, response_1, response_2, response_3 } = data
 
@@ -15,3 +16,5 @@ $.get('/api/poll', function(data) {
                       `)
    }
 });
+
+const socket = io();

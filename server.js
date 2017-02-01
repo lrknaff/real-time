@@ -14,14 +14,6 @@ app.use('/poll', express.static(path.join(__dirname, 'public')));
 
 app.use('/', express.static(path.join(__dirname, 'public/authO')));
 
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/public/authO/sign-in.html');
-// });
-
-// app.get('/login', (req, res) => {
-//   res.sendFile(__dirname + '/public/authO/sign-in.html');
-// });
-
 const port= process.env.PORT || 3000;
 
 const server = http.createServer(app)
@@ -55,5 +47,14 @@ app.post('/api/poll', (req, res) => {
     response_3: response3
   });
 });
+
+
+const socketIo = require('socket.io');
+const io = socketIo(server);
+
+io.on('connection', (socket) => {
+  console.log('A user has connected.')
+});
+
 
 module.exports = server;
