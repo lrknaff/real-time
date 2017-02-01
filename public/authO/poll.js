@@ -3,7 +3,6 @@ const socket = io();
 const pollId = window.location.pathname.split("/")[2]
 
 $.get(`/api/poll/${pollId}`, function(data) {
-  console.log(data)
   const { question, response_1, response_2, response_3 } = data
 
   if(!question) {
@@ -24,7 +23,15 @@ socket.on('usersConnected', (count) => {
 });
 
 socket.on('userList', (users) => {
-  console.log(users)
+  users.forEach((user) => {
+    $('.user-list').append(`
+                            <div class="user">
+                              <img class="user-avatar" src=${user.picture}/>
+                              <p class="user-name">${user.name}</p>
+                              <p class="user-vote">Vote: </p>
+                            </div>
+                          `)
+  })
 });
 
 

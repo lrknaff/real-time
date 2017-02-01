@@ -46,7 +46,6 @@ $(document).ready(function() {
         // Display user information
         show_profile_info(profile);
         socket.send('userInformation', profile);
-        console.log(profile)
       });
     }
   };
@@ -58,6 +57,7 @@ $(document).ready(function() {
      $('.btn-logout').show();
      $('.poll').show();
      $('.connection-count').show();
+     $('.user-list').show();
   };
 
   var logout = function() {
