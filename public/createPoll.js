@@ -15,5 +15,4 @@ $('.submit-poll-button').on('click', function() {
       response3: response3
     }
   });
-
 });
