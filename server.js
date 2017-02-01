@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const votes = {};
-const user = {};
+const users = [];
 app.locals.poll = {};
 
 app.use('/poll', express.static(path.join(__dirname, 'public')));
@@ -53,7 +53,6 @@ app.post('/api/poll/:id', (req, res) => {
   });
 });
 
-
 const socketIo = require('socket.io');
 const io = socketIo(server);
 
@@ -62,19 +61,21 @@ io.on('connection', (socket) => {
 
   io.sockets.emit('usersConnected', io.engine.clientsCount);
 
-  socket.on('disconnect', () => {
-    console.log('A user has disconnected.', io.engine.clientsCount);
-    io.sockets.emit('usersConnected', io.engine.clientsCount);
-  });
-
   socket.on('message', (channel, message) => {
     if(channel === "voteCast") {
       votes[socket.id] = message;
       console.log('votes', votes)
     }
     if(channel === "userInformation") {
-      user[socket.id] = {name: message.name, picture: message.picture}
+      users.push({name: message.name, picture: message.picture})
+      io.sockets.emit('userList', users)
+      console.log('users', users)
     }
+  });
+
+  socket.on('disconnect', () => {
+    console.log('A user has disconnected.', io.engine.clientsCount);
+    io.sockets.emit('usersConnected', io.engine.clientsCount);
   });
 });
 

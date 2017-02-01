@@ -23,6 +23,10 @@ socket.on('usersConnected', (count) => {
   $('.connection-count').text(`Voters: ${count}`);
 });
 
+socket.on('userList', (users) => {
+  console.log(users)
+});
+
 
 $(document).ready(function() {
   const buttons = document.querySelectorAll('#choices');
