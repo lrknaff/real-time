@@ -3,28 +3,23 @@
   <head>
     <meta charset="utf-8">
     <title>Real Time</title>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h2>Create Poll</h2>
-    <label>
-      Question:
+    <article class="poll-form">
+      <h2 class="poll-title">Create Poll</h2>
+      <label>Question:</label>
       <input id="choices" class="question" type="text" placeholder="What is your question?"/>
-    </label>
-    <section>
-      <label>
-        Response 1:
+      <section>
+        <label>Response 1:</label>
         <input class="response-1" type="text" placeholder="Response 1"/>
-      </label>
-      <label>
-        Response 2:
+        <label>Response 2:</label>
         <input class="response-2" type="text" placeholder="Response 2"/>
-      </label>
-      <label>
-        Response 3:
+        <label>Response 3:</label>
         <input class="response-3" type="text" placeholder="Response 3"/>
-      </label>
-      <input class="submit-poll-button" type="submit" value="Create Poll"/>
-    </section>
+        <input class="submit-poll-button" type="submit" value="Create Poll"/>
+      </section>
+    </article>
 
     <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>

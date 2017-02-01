@@ -13,7 +13,11 @@ app.locals.poll = {};
 
 app.use('/poll', express.static(path.join(__dirname, 'public')));
 
-app.use('/', express.static(path.join(__dirname, 'public/authO')));
+// app.use('/', express.static(path.join(__dirname, 'public')));
+
+app.use('/login', express.static(path.join(__dirname, 'public/authO')));
+
+app.use('/login/:id', express.static(path.join(__dirname, 'public/authO')));
 
 const port= process.env.PORT || 3000;
 
@@ -22,15 +26,14 @@ const server = http.createServer(app)
                       console.log(`Listening on port ${port}.`);
                     });
 
-app.get('/api/poll', (req, res) => {
+app.get('/api/poll/:id', (req, res) => {
   res.json(app.locals.poll);
 });
 
-app.post('/api/poll', (req, res) => {
+app.post('/api/poll/:id', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
 
-  const { question, response1, response2, response3 } = req.body
-  const id = md5(question)
+  const { id, question, response1, response2, response3 } = req.body
 
   if(!req.body) {
     return res.status(402).send({

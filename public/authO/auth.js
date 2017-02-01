@@ -2,7 +2,12 @@ $(document).ready(function() {
 
   var lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN, {
     auth: {
-      params: { scope: 'openid email' } //Details: https://auth0.com/docs/scopes
+      redirectUrl: window.location.origin + '/login',
+      responseType: 'token',
+      params: {
+        state: JSON.stringify({pathname: window.location.pathname})
+       },
+       //Details: https://auth0.com/docs/scopes
     }
   });
 
@@ -48,6 +53,7 @@ $(document).ready(function() {
      $('.avatar').attr('src', profile.picture).show();
      $('.btn-logout').show();
      $('.poll').show();
+     $('.connection-count').show();
   };
 
   var logout = function() {
