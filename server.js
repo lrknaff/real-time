@@ -10,9 +10,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.locals.poll = {};
 
-app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/poll', express.static(path.join(__dirname, 'public')));
 
-app.use('/login', express.static(path.join(__dirname, 'public/authO')));
+app.use('/', express.static(path.join(__dirname, 'public/authO')));
 
 // app.get('/', (req, res) => {
 //   res.sendFile(__dirname + '/public/authO/sign-in.html');
