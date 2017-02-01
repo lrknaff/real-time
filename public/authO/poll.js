@@ -1,3 +1,5 @@
+const socket = io();
+
 $.get('/api/poll', function(data) {
   const { question, response_1, response_2, response_3 } = data
 
@@ -7,11 +9,26 @@ $.get('/api/poll', function(data) {
                       <h2>Error Retrieving Poll</h2>
                       `)
   } else {
-    $('.poll').append(`
-                      <h2>${question}</h2>
-                      <input type="submit" value=${response_1} />
-                      <input type="submit" value=${response_2} />
-                      <input type="submit" value=${response_3} />
-                      `)
-   }
+    $('.question').text(question);
+    $('.choice1').val(response_1);
+    $('.choice2').val(response_2);
+    $('.choice3').val(response_3);
+  }
 });
+
+socket.on('usersConnected', (count) => {
+  $('.connection-count').text(`Voters: ${count}`);
+});
+
+
+$(document).ready(function() {
+  const buttons = document.querySelectorAll('#choices');
+
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', function() {
+      console.log(this.value);
+      socket.send('voteCast', this.value);
+    });
+  }
+
+})

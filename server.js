@@ -8,19 +8,12 @@ const md5 = require('md5');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const votes = {};
 app.locals.poll = {};
 
 app.use('/poll', express.static(path.join(__dirname, 'public')));
 
 app.use('/', express.static(path.join(__dirname, 'public/authO')));
-
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/public/authO/sign-in.html');
-// });
-
-// app.get('/login', (req, res) => {
-//   res.sendFile(__dirname + '/public/authO/sign-in.html');
-// });
 
 const port= process.env.PORT || 3000;
 
@@ -55,5 +48,28 @@ app.post('/api/poll', (req, res) => {
     response_3: response3
   });
 });
+
+
+const socketIo = require('socket.io');
+const io = socketIo(server);
+
+io.on('connection', (socket) => {
+  console.log('A user has connected.', io.engine.clientsCount);
+
+  io.sockets.emit('usersConnected', io.engine.clientsCount);
+
+  socket.on('disconnect', () => {
+    console.log('A user has disconnected.', io.engine.clientsCount);
+    io.sockets.emit('usersConnected', io.engine.clientsCount);
+  });
+
+  socket.on('message', (channel, message) => {
+    if(channel === "voteCast") {
+      votes[socket.id] = message;
+      console.log('votes', votes)
+    }
+  });
+});
+
 
 module.exports = server;
