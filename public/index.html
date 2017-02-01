@@ -5,29 +5,29 @@
     <title>Real Time</title>
   </head>
   <body>
-    <Form>
-      <h2>Create Poll</h2>
+    <h2>Create Poll</h2>
+    <label>
+      Question:
+      <input class="question" type="text" placeholder="What is your question?"/>
+    </label>
+    <section>
       <label>
-        Question:
-        <input type="text" placeholder="What is your question?"/>
+        Response 1:
+        <input class="response-1" type="text" placeholder="Response 1"/>
       </label>
-      <section>
-        <label>
-          Answer 1:
-          <input type="text" placeholder="Answer 1"/>
-        </label>
-        <label>
-          Answer 2:
-          <input type="text" placeholder="Answer 2"/>
-        </label>
-        <label>
-          Question:
-          <input type="text" placeholder="What is your question?"/>
-        </label>
-      </section>
-    </Form>
+      <label>
+        Response 2:
+        <input class="response-2" type="text" placeholder="Response 2"/>
+      </label>
+      <label>
+        Response 3:
+        <input class="response-3" type="text" placeholder="Response 3"/>
+      </label>
+      <input class="submit-poll-button" type="submit" value="Create Poll"/>
+    </section>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/client.js"></script>
+    <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script src="client.js"></script>
   </body>
 </html>
