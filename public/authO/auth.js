@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  const socket = io();
+
   var lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN, {
     auth: {
       redirectUrl: window.location.origin + '/login',
@@ -43,6 +45,8 @@ $(document).ready(function() {
         }
         // Display user information
         show_profile_info(profile);
+        socket.send('userInformation', profile);
+        console.log(profile)
       });
     }
   };

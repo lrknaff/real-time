@@ -29,7 +29,6 @@ $(document).ready(function() {
 
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', function() {
-      console.log(this.value);
       socket.send('voteCast', this.value);
     });
   }

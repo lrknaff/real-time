@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const votes = {};
+const user = {};
 app.locals.poll = {};
 
 app.use('/poll', express.static(path.join(__dirname, 'public')));
@@ -70,6 +71,9 @@ io.on('connection', (socket) => {
     if(channel === "voteCast") {
       votes[socket.id] = message;
       console.log('votes', votes)
+    }
+    if(channel === "userInformation") {
+      user[socket.id] = {name: message.name, picture: message.picture}
     }
   });
 });
