@@ -61,6 +61,10 @@ io.on('connection', (socket) => {
     console.log('A user has disconnected.', io.engine.clientsCount);
     io.sockets.emit('usersConnected', io.engine.clientsCount);
   });
+  
+  socket.on('message', (channel, message) => {
+    console.log(channel, message);
+  });
 });
 
 
