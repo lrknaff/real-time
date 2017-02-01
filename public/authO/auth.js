@@ -48,6 +48,7 @@ $(document).ready(function() {
      $('.avatar').attr('src', profile.picture).show();
      $('.btn-logout').show();
      $('.poll').show();
+     $('.connection-count');
   };
 
   var logout = function() {

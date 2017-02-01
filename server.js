@@ -22,15 +22,14 @@ const server = http.createServer(app)
                       console.log(`Listening on port ${port}.`);
                     });
 
-app.get('/api/poll', (req, res) => {
+app.get('/api/poll/:id', (req, res) => {
   res.json(app.locals.poll);
 });
 
-app.post('/api/poll', (req, res) => {
+app.post('/api/poll/:id', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
 
-  const { question, response1, response2, response3 } = req.body
-  const id = md5(question)
+  const { id, question, response1, response2, response3 } = req.body
 
   if(!req.body) {
     return res.status(402).send({
