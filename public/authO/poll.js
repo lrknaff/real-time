@@ -1,6 +1,8 @@
 const socket = io();
 
-$.get('/api/poll', function(data) {
+const pollId = window.location.pathname.split("/")[2]
+
+$.get(`/api/poll/${pollId}`, function(data) {
   const { question, response_1, response_2, response_3 } = data
 
   if(!question) {
