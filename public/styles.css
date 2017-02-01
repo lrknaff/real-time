@@ -1,0 +1,51 @@
+body {
+  box-sizing: border-box;
+  background: #484848;
+  font-family: monospace;
+}
+
+.poll-form {
+  background: linear-gradient(#4ECDC4, #556270);
+  width: 80%;
+  height: 575px;
+  position: relative;
+  margin: 0 auto;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+input, label {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  width: 250px;
+}
+
+input {
+  margin-bottom: 20px;
+  border: none;
+  height: 30px;
+  padding: 7px;
+}
+
+.response-1, .response-2, .response-3 {
+  box-shadow:inset 0 0 1px #000;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+.poll-title {
+  text-align: center;
+  padding-top: 25px;
+  font-size: 30px;
+}
+
+.submit-poll-button {
+  cursor: pointer;
+  background: #4ECDC4;
+  color: white;
+  margin-top: 54px;
+  width: 262px;
+  height: 40px;
+}
