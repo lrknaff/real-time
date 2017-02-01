@@ -12,6 +12,7 @@ $('.submit-poll-button').on('click', function() {
     url: `/api/poll/${id}`,
     type: 'post',
     data: {
+      id: id,
       question: question,
       response1: response1,
       response2: response2,
@@ -26,9 +27,14 @@ hidePoll = (id) => {
   postLink(id);
 };
 
-postLink = (id) => {
+postLink = (poll) => {
+  console.log(poll.id)
   $('body').append(`
-                    <div>nice!
-                    </div>
+                    <p>Link to api:
+                      <a href ="/api/poll/${poll.id}">${window.location.hostname}/api/poll/${poll.id}</a>
+                    </p>
+                    <p>Link to quiz:
+                      <a href ="/poll/${poll.id}">${window.location.hostname}/poll/${poll.id}</a>
+                    </p>
                   `)
 };
