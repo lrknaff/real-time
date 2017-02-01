@@ -34,7 +34,7 @@ postLink = (poll) => {
                       <a href ="/api/poll/${poll.id}">${window.location.hostname}/api/poll/${poll.id}</a>
                     </p>
                     <p>Link to quiz:
-                      <a href ="/poll/${poll.id}">${window.location.hostname}/poll/${poll.id}</a>
+                      <a href ="/login/${poll.id}">${window.location.hostname}/login/${poll.id}</a>
                     </p>
                   `)
 };

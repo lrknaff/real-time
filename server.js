@@ -13,7 +13,11 @@ app.locals.poll = {};
 
 app.use('/poll', express.static(path.join(__dirname, 'public')));
 
-app.use('/', express.static(path.join(__dirname, 'public/authO')));
+// app.use('/', express.static(path.join(__dirname, 'public')));
+
+app.use('/login', express.static(path.join(__dirname, 'public/authO')));
+
+app.use('/login/:id', express.static(path.join(__dirname, 'public/authO')));
 
 const port= process.env.PORT || 3000;
 
