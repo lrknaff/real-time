@@ -3,21 +3,24 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
+const md5 = require('md5');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.locals.poll = [];
+app.locals.poll = {};
 
-app.use(express.static('public'));
+app.use('/', express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
-});
+app.use('/login', express.static(path.join(__dirname, 'public/authO')));
 
-app.get('/login', (req, res) => {
-  res.sendFile(__dirname + '/public/authO/sign-in.html');
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(__dirname + '/public/authO/sign-in.html');
+// });
+
+// app.get('/login', (req, res) => {
+//   res.sendFile(__dirname + '/public/authO/sign-in.html');
+// });
 
 const port= process.env.PORT || 3000;
 
@@ -31,20 +34,21 @@ app.get('/api/poll', (req, res) => {
 });
 
 app.post('/api/poll', (req, res) => {
-  // res.setHeader('Content-Type', 'application/json');
-  console.log(req.body)
+  res.setHeader('Content-Type', 'application/json');
 
   const { question, response1, response2, response3 } = req.body
+  const id = md5(question)
 
-  if(!question) {
+  if(!req.body) {
     return res.status(402).send({
       error: 'No post provided'
     });
   }
 
-  app.locals.poll.push({ question: question, response_1: response1, response_2: response2, response_3: response3 })
+  app.locals.poll = { id: id, question: question, response_1: response1, response_2: response2, response_3: response3 }
 
   res.status(202).json({
+    id: id,
     question: question,
     response_1: response1,
     response_2: response2,
