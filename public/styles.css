@@ -49,3 +49,12 @@ label {
   width: 262px;
   height: 40px;
 }
+
+.link {
+  color: white;
+  font-size: 16px;
+}
+
+a {
+  color: #4ECDC4;
+}

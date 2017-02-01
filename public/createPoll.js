@@ -7,6 +7,7 @@ $('.submit-poll-button').on('click', function() {
   const id = Date.now();
 
   console.log(id)
+  console.log(question)
 
   $.ajax({
     url: `/api/poll/${id}`,
@@ -30,10 +31,10 @@ hidePoll = (id) => {
 postLink = (poll) => {
   console.log(poll.id)
   $('body').append(`
-                    <p>Link to api:
+                    <p class="link">Link to api:
                       <a href ="/api/poll/${poll.id}">${window.location.hostname}/api/poll/${poll.id}</a>
                     </p>
-                    <p>Link to quiz:
+                    <p class="link">Link to quiz:
                       <a href ="/login/${poll.id}">${window.location.hostname}/login/${poll.id}</a>
                     </p>
                   `)

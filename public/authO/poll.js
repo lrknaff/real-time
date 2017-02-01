@@ -3,6 +3,7 @@ const socket = io();
 const pollId = window.location.pathname.split("/")[2]
 
 $.get(`/api/poll/${pollId}`, function(data) {
+  console.log(data)
   const { question, response_1, response_2, response_3 } = data
 
   if(!question) {
