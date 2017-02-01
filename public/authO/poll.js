@@ -18,3 +18,8 @@ $.get('/api/poll', function(data) {
 });
 
 const socket = io();
+
+socket.on('usersConnected', (count) => {
+  console.log(count)
+  $('.connection-count').append(`Voters: ${count}`);
+});
