@@ -21,5 +21,5 @@ const socket = io();
 
 socket.on('usersConnected', (count) => {
   console.log(count)
-  $('.connection-count').append(`Voters: ${count}`);
+  $('.connection-count').text(`Voters: ${count}`);
 });
