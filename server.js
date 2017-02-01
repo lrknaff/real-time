@@ -8,6 +8,7 @@ const md5 = require('md5');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const votes = {};
 app.locals.poll = {};
 
 app.use('/poll', express.static(path.join(__dirname, 'public')));
@@ -61,9 +62,12 @@ io.on('connection', (socket) => {
     console.log('A user has disconnected.', io.engine.clientsCount);
     io.sockets.emit('usersConnected', io.engine.clientsCount);
   });
-  
+
   socket.on('message', (channel, message) => {
-    console.log(channel, message);
+    if(channel === "voteCast") {
+      votes[socket.id] = message;
+      console.log('votes', votes)
+    }
   });
 });
 
