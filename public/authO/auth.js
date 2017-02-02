@@ -50,7 +50,6 @@ $(document).ready(function() {
         show_profile_info(profile);
         socket.send('userInformation', profile);
         socket.send('individualUser', profile);
-        console.log(profile)
       });
     }
   };

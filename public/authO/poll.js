@@ -2,8 +2,9 @@ const socket = io();
 const pollId = window.location.pathname.split("/")[2]
 
 let list = JSON.parse(localStorage.getItem('userList'))
-console.log(list)
-console.log(_.uniqBy(list, 'name'))
+let reducedList = _.uniqBy(list, 'user_id')
+let individualUser = JSON.parse(localStorage.getItem('userList'))
+console.log(individualUser)
 
 $.get(`/api/poll/${pollId}`, function(data) {
   data.forEach((poll) => {
@@ -18,33 +19,27 @@ $.get(`/api/poll/${pollId}`, function(data) {
   });
 });
 
+socket.on('voteCast', (vote) => {
+  let userVote = individualUser[0].user_id
+  $('.your-vote').text(`Your vote: ${vote[userVote]}`)
+  console.log(vote)
+  $('body').append(`<div>${vote}</div>`)
+});
+
 socket.on('usersConnected', (count) => {
   $('.connection-count').text(`Voters: ${count}`);
 });
 
-socket.on('individualUser', (individualUser) => {
-  localStorage.setItem('user', individualUser)
-  console.log(individualUser)
-});
-
-socket.on('voteCast', (vote) => {
-  $('.your-vote').text(`Your vote: ${Object.values(vote)[0]}`)
+socket.on('individualUser', (user) =>
+{
+  JSON.stringify(user)
+  localStorage.setItem('individualUser', user)
 });
 
 socket.on('userList', (users) => {
     let userList = JSON.stringify(users)
     localStorage.setItem('userList', userList)
-    // console.log(users)
-    // users.forEach((user) => {
-    //   $('.user-list').append(`
-    //                         <div id=${user.user_id} class="user">
-    //                           <img class="user-avatar" src=${user.picture}/>
-    //                           <p class="user-name">${user.name}</p>
-    //                           <p class="user-vote">Vote: </p>
-    //                         </div>
-    //                         `)
-    //   })
-    });
+ });
 
 
 $(document).ready(function() {
@@ -55,5 +50,4 @@ $(document).ready(function() {
       socket.send('voteCast', this.value);
     });
   }
-
-})
+});

@@ -61,26 +61,26 @@ const socketIo = require('socket.io');
 const io = socketIo(server);
 
 io.on('connection', (socket) => {
-  console.log('A user has connected.',
-io.engine.clientsCount);
+  console.log('A user has connected.', io.engine.clientsCount);
 
   io.sockets.emit('usersConnected', io.engine.clientsCount);
 
   socket.on('message', (channel, message) => {
     if(channel === "voteCast") {
       votes[individualUser[0].user_id] = message;
+      console.log(votes)
       io.sockets.emit('voteCast', votes)
     }
     if(channel === "userInformation") {
       let newUser = { user_id: message.clientID, name: message.name, picture: message.picture }
 
       users.push(newUser)
-      console.log(users)
       io.sockets.emit('userList', users)
     }
     if(channel === "individualUser") {
       individualUser[0] = ({user_id: message.clientID, name: message.name})
-      io.sockets.emit('user', individualUser)
+      console.log(individualUser)
+      io.sockets.emit('individualUser', individualUser)
     }
   });
 
