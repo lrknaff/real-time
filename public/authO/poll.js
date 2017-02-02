@@ -21,11 +21,14 @@ $.get(`/api/poll/${pollId}`, function(data) {
 socket.on('voteCast', (vote) => {
   let userVote = individualUser[0].user_id
   $('.your-vote').text(`Your vote: ${vote[userVote]}`)
-  console.log(vote)
   $('.vote-list').empty()
   for(var key in vote) {
+    console.log(vote)
+    let voteId = Object.keys(vote)[0]
+    console.log(voteId)
+    console.log(_.filter(list, ['user_id', voteId]))
     if(vote.hasOwnProperty(key)) {
-      $('.vote-list').append(`<p>${userVote[userVote]}</p>`)
+      $('.vote-list').append(`<p>${list[voteId[0]].name}${vote[userVote]}</p>`)
     }
   }
 });
