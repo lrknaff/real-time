@@ -6,7 +6,6 @@ $.get(`/api/poll/${pollId}`, function(data) {
   const { question, response_1, response_2, response_3 } = data
 
   if(!question) {
-    console.log('no data')
     $('.poll').prepend(`
                       <h2>Error Retrieving Poll</h2>
                       `)
@@ -20,6 +19,10 @@ $.get(`/api/poll/${pollId}`, function(data) {
 
 socket.on('usersConnected', (count) => {
   $('.connection-count').text(`Voters: ${count}`);
+});
+
+socket.on('voteCast', (vote) => {
+  $('.your-vote').text(`Your vote: ${Object.values(vote)[0]}`)
 });
 
 socket.on('userList', (users) => {
