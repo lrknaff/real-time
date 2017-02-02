@@ -19,7 +19,7 @@ socket.on('usersConnected', (count) => {
 });
 
 socket.on('individualUser', (individualUser) => {
-  localStorage.set('user', individualUser)
+  console.log(individualUser)
 });
 
 socket.on('voteCast', (vote) => {
