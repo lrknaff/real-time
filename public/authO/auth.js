@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+  const socket = io();
+  const pollId = localStorage.pollId
+
   var lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN, {
     auth: {
       redirectUrl: window.location.origin + '/login',
@@ -30,6 +33,8 @@ $(document).ready(function() {
       localStorage.setItem('id_token', authResult.idToken);
       // Display user information
       show_profile_info(profile);
+      socket.send('individualUser', profile);
+      socket.send('userInformation', profile);
     });
   });
 
@@ -43,22 +48,26 @@ $(document).ready(function() {
         }
         // Display user information
         show_profile_info(profile);
+        socket.send('userInformation', profile);
+        socket.send('individualUser', profile);
       });
     }
   };
 
   var show_profile_info = function(profile) {
-     $('.nickname').text(profile.nickname);
+     $('.nickname').text(profile.name);
      $('.btn-login').hide();
      $('.avatar').attr('src', profile.picture).show();
      $('.btn-logout').show();
      $('.poll').show();
      $('.connection-count').show();
+     $('.user-list').show();
+     $('.vote-list').show();
   };
 
   var logout = function() {
     localStorage.removeItem('id_token');
-    window.location.href = "/";
+    window.location.href = "/login";
   };
 
   retrieve_profile();

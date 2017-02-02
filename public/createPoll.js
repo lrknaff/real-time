@@ -6,9 +6,6 @@ $('.submit-poll-button').on('click', function() {
   const response3 = $('.response-3').val();
   const id = Date.now();
 
-  console.log(id)
-  console.log(question)
-
   $.ajax({
     url: `/api/poll/${id}`,
     type: 'post',

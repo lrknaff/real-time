@@ -3,7 +3,9 @@
   <head>
     <title>Real Time - Login</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
     <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 
     <!-- Auth0 lock script -->
@@ -18,16 +20,20 @@
 
   <body>
     <img alt="avatar" class="avatar" style="display:none;">
-    <p>Welcome <span class="nickname"></span></p>
-    <button type="submit" class="btn-login">Sign In</button>
+    <p class="welcome">Welcome: <span class="nickname"></span></p>
     <button type="submit" class="btn-logout" style="display:none;">Sign Out</button>
+    <p class="connection-count" style="display:none"></p>
+
+    <button type="submit" class="btn-login">Sign In</button>
 
     <div class="poll" style="display:none;">
       <h2 class="question"></h2>
       <input id="choices" class="choice1" type="submit" value="" />
       <input id="choices" class="choice2" type="submit" value="" />
       <input id="choices" class="choice3" type="submit" value="" />
+      <p class="your-vote"></p>
     </div>
-    <div class="connection-count" style="display:none"></div>
+    <div class="user-list" style="display:none"></div>
+    <div class="vote-list" style="display:none"></div>
   </body>
 </html>

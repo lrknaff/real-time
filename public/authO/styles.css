@@ -4,26 +4,36 @@ body {
   font-family: monospace;
 }
 
-.poll-form {
+p {
+  color: white;
+}
+
+.poll {
   background: linear-gradient(#4ECDC4, #556270);
   width: 80%;
-  height: 600px;
+  height: 350px;
   position: relative;
-  margin: 0 auto;
+  margin: 20px auto;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.your-vote {
+  text-align: center;
 }
 
 input, label {
   display: block;
   position: relative;
   margin: 0 auto;
-  width: 250px;
+  width: 80%;
 }
 
 input {
-  margin-bottom: 15px;
+  background: white;
+  margin-bottom: 20px;
+  margin-top: 27px;
   border: none;
-  height: 30px;
+  height: 45px;
   padding: 7px;
 }
 
@@ -35,30 +45,33 @@ label {
   margin-bottom: 10px;
 }
 
-.poll-title {
+.welcome {
+  padding-top: 23px;
+}
+
+h2 {
   text-align: center;
   padding-top: 25px;
   font-size: 30px;
+  width: 80%;
+  margin: 10px auto;
 }
 
-.submit-poll-button {
-  cursor: pointer;
-  background: #4ECDC4;
-  color: white;
-  margin-top: 54px;
-  width: 262px;
-  height: 40px;
+img {
+  width: 75px;
+  margin-left: 14px;
 }
 
-.link {
-  color: white;
-  font-size: 16px;
+.avatar {
+  float: left;
+  margin: 10px;
 }
 
-a {
-  color: #4ECDC4;
+.connection-count {
+  padding-top: 35px;
+  margin-left: 14px;
 }
 
-.question {
-  margin-bottom: 55px;
+.user-name-vote {
+  margin-left: 14px;
 }

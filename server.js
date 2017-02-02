@@ -9,15 +9,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const votes = {};
-app.locals.poll = {};
+const users = [];
+const individualUser = [];
+app.locals.polls = [];
+
 
 app.use('/poll', express.static(path.join(__dirname, 'public')));
-
-// app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.use('/login', express.static(path.join(__dirname, 'public/authO')));
 
 app.use('/login/:id', express.static(path.join(__dirname, 'public/authO')));
+
+app.get('/', (req, res) => {
+  res.redirect('/poll')
+});
 
 const port= process.env.PORT || 3000;
 
@@ -27,7 +32,7 @@ const server = http.createServer(app)
                     });
 
 app.get('/api/poll/:id', (req, res) => {
-  res.json(app.locals.poll);
+  res.json(app.locals.polls);
 });
 
 app.post('/api/poll/:id', (req, res) => {
@@ -41,7 +46,7 @@ app.post('/api/poll/:id', (req, res) => {
     });
   }
 
-  app.locals.poll = { id: id, question: question, response_1: response1, response_2: response2, response_3: response3 }
+  app.locals.polls.push({ id: id, question: question, response_1: response1, response_2: response2, response_3: response3 })
 
   res.status(202).json({
     id: id,
@@ -52,7 +57,6 @@ app.post('/api/poll/:id', (req, res) => {
   });
 });
 
-
 const socketIo = require('socket.io');
 const io = socketIo(server);
 
@@ -61,16 +65,28 @@ io.on('connection', (socket) => {
 
   io.sockets.emit('usersConnected', io.engine.clientsCount);
 
+  socket.on('message', (channel, message) => {
+    if(channel === "voteCast") {
+      votes[individualUser[0].user_id] = message;
+      console.log(votes)
+      io.sockets.emit('voteCast', votes)
+    }
+    if(channel === "userInformation") {
+      let newUser = { user_id: message.clientID, name: message.name, picture: message.picture }
+
+      users.push(newUser)
+      io.sockets.emit('userList', users)
+    }
+    if(channel === "individualUser") {
+      individualUser[0] = ({user_id: message.clientID, name: message.name})
+      console.log(individualUser)
+      io.sockets.emit('individualUser', individualUser)
+    }
+  });
+
   socket.on('disconnect', () => {
     console.log('A user has disconnected.', io.engine.clientsCount);
     io.sockets.emit('usersConnected', io.engine.clientsCount);
-  });
-
-  socket.on('message', (channel, message) => {
-    if(channel === "voteCast") {
-      votes[socket.id] = message;
-      console.log('votes', votes)
-    }
   });
 });
 
