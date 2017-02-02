@@ -1,6 +1,10 @@
 const socket = io();
 const pollId = window.location.pathname.split("/")[2]
 
+let list = JSON.parse(localStorage.getItem('userList'))
+console.log(list)
+console.log(_.uniqBy(list, 'name'))
+
 $.get(`/api/poll/${pollId}`, function(data) {
   data.forEach((poll) => {
     const { id, question, response_1, response_2, response_3 } = poll

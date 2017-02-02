@@ -72,7 +72,10 @@ io.engine.clientsCount);
       io.sockets.emit('voteCast', votes)
     }
     if(channel === "userInformation") {
-      users.push({ user_id: message.clientID, name: message.name, picture: message.picture })
+      let newUser = { user_id: message.clientID, name: message.name, picture: message.picture }
+
+      users.push(newUser)
+      console.log(users)
       io.sockets.emit('userList', users)
     }
     if(channel === "individualUser") {
