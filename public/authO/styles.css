@@ -45,6 +45,10 @@ label {
   margin-bottom: 10px;
 }
 
+.welcome {
+  padding-top: 23px;
+}
+
 h2 {
   text-align: center;
   padding-top: 25px;
@@ -56,4 +60,14 @@ h2 {
 img {
   width: 75px;
   border-radius: 50%;
+}
+
+.avatar {
+  float: left;
+  margin: 10px;
+}
+
+.connection-count {
+  padding-top: 35px;
+  margin-left: 14px;
 }

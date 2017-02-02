@@ -19,6 +19,7 @@ socket.on('usersConnected', (count) => {
 });
 
 socket.on('individualUser', (individualUser) => {
+  localStorage.setItem('user', individualUser)
   console.log(individualUser)
 });
 
@@ -27,16 +28,18 @@ socket.on('voteCast', (vote) => {
 });
 
 socket.on('userList', (users) => {
-    console.log(users)
-    users.forEach((user) => {
-      $('.user-list').html(`
-                            <div id=${user.user_id} class="user">
-                              <img class="user-avatar" src=${user.picture}/>
-                              <p class="user-name">${user.name}</p>
-                              <p class="user-vote">Vote: </p>
-                            </div>
-                            `)
-      })
+    let userList = JSON.stringify(users)
+    localStorage.setItem('userList', userList)
+    // console.log(users)
+    // users.forEach((user) => {
+    //   $('.user-list').append(`
+    //                         <div id=${user.user_id} class="user">
+    //                           <img class="user-avatar" src=${user.picture}/>
+    //                           <p class="user-name">${user.name}</p>
+    //                           <p class="user-vote">Vote: </p>
+    //                         </div>
+    //                         `)
+    //   })
     });
 
 
