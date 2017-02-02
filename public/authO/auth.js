@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
   const socket = io();
+  const pollId = localStorage.pollId
 
   var lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN, {
     auth: {
@@ -32,7 +33,6 @@ $(document).ready(function() {
       localStorage.setItem('id_token', authResult.idToken);
       // Display user information
       show_profile_info(profile);
-      console.log(profile);
     });
   });
 
@@ -47,6 +47,7 @@ $(document).ready(function() {
         // Display user information
         show_profile_info(profile);
         socket.send('userInformation', profile);
+        console.log(profile)
       });
     }
   };

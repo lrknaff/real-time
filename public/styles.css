@@ -7,7 +7,7 @@ body {
 .poll-form {
   background: linear-gradient(#4ECDC4, #556270);
   width: 80%;
-  height: 575px;
+  height: 600px;
   position: relative;
   margin: 0 auto;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
@@ -21,7 +21,7 @@ input, label {
 }
 
 input {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   border: none;
   height: 30px;
   padding: 7px;
@@ -57,4 +57,8 @@ label {
 
 a {
   color: #4ECDC4;
+}
+
+.question {
+  margin-bottom: 55px;
 }

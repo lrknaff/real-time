@@ -8,19 +8,22 @@ const md5 = require('md5');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.locals.votes = {};
+app.locals.users = [];
 const votes = {};
 const users = [];
-app.locals.poll = {};
+app.locals.polls = [];
 
-app.get('/', (req, res) => {
-  res.redirect('/poll')
-});
 
 app.use('/poll', express.static(path.join(__dirname, 'public')));
 
 app.use('/login', express.static(path.join(__dirname, 'public/authO')));
 
 app.use('/login/:id', express.static(path.join(__dirname, 'public/authO')));
+
+app.get('/', (req, res) => {
+  res.redirect('/poll')
+});
 
 const port= process.env.PORT || 3000;
 
@@ -30,7 +33,7 @@ const server = http.createServer(app)
                     });
 
 app.get('/api/poll/:id', (req, res) => {
-  res.json(app.locals.poll);
+  res.json(app.locals.polls);
 });
 
 app.post('/api/poll/:id', (req, res) => {
@@ -44,7 +47,7 @@ app.post('/api/poll/:id', (req, res) => {
     });
   }
 
-  app.locals.poll = { id: id, question: question, response_1: response1, response_2: response2, response_3: response3 }
+  app.locals.polls.push({ id: id, question: question, response_1: response1, response_2: response2, response_3: response3 })
 
   res.status(202).json({
     id: id,
@@ -59,7 +62,8 @@ const socketIo = require('socket.io');
 const io = socketIo(server);
 
 io.on('connection', (socket) => {
-  console.log('A user has connected.', io.engine.clientsCount);
+  console.log('A user has connected.',
+io.sockets.sockets);
 
   io.sockets.emit('usersConnected', io.engine.clientsCount);
 

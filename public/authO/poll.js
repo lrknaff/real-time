@@ -1,18 +1,17 @@
 const socket = io();
-
 const pollId = window.location.pathname.split("/")[2]
 
 $.get(`/api/poll/${pollId}`, function(data) {
-  const { question, response_1, response_2, response_3 } = data
+  data.forEach((poll) => {
+    const { id, question, response_1, response_2, response_3 } = poll
 
-  if(!question) {
-    $('.question').text('Error Retrieving Poll')
-  } else {
-    $('.question').text(question);
-    $('.choice1').val(response_1);
-    $('.choice2').val(response_2);
-    $('.choice3').val(response_3);
-  }
+    if(id === pollId) {
+      $('.question').text(question);
+      $('.choice1').val(response_1);
+      $('.choice2').val(response_2);
+      $('.choice3').val(response_3);
+    }
+  });
 });
 
 socket.on('usersConnected', (count) => {
