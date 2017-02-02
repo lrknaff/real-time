@@ -26,7 +26,10 @@ socket.on('voteCast', (vote) => {
     let voteId = Object.keys(vote)[0]
     let user = _.filter(list, ['user_id', voteId])
     if(vote.hasOwnProperty(key)) {
-      $('.vote-list').append(`<p>${user[0].name}: ${vote[userVote]}</p>`)
+      $('.vote-list').append(`
+        <img src=${user[0].picture} />
+        <p class="user-name-vote">${user[0].name}: ${vote[userVote]}</p>
+       `)
     }
   }
 });

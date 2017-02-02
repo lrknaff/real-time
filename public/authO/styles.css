@@ -59,7 +59,7 @@ h2 {
 
 img {
   width: 75px;
-  border-radius: 50%;
+  margin-left: 14px;
 }
 
 .avatar {
@@ -69,5 +69,9 @@ img {
 
 .connection-count {
   padding-top: 35px;
+  margin-left: 14px;
+}
+
+.user-name-vote {
   margin-left: 14px;
 }
