@@ -63,8 +63,8 @@ io.on('connection', (socket) => {
 
   socket.on('message', (channel, message) => {
     if(channel === "voteCast") {
-      let id = socket.id
       votes[socket.id] = message;
+      io.sockets.emit('voteCast', votes)
       console.log('votes', votes)
     }
     if(channel === "userInformation") {

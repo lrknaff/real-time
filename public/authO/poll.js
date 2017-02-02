@@ -7,7 +7,7 @@ $.get(`/api/poll/${pollId}`, function(data) {
 
   if(!question) {
     console.log('no data')
-    $('.poll').append(`
+    $('.poll').prepend(`
                       <h2>Error Retrieving Poll</h2>
                       `)
   } else {
@@ -23,16 +23,16 @@ socket.on('usersConnected', (count) => {
 });
 
 socket.on('userList', (users) => {
-  users.forEach((user) => {
-    $('.user-list').append(`
+    users.forEach((user) => {
+      $('.user-list').html(`
                             <div class="user">
                               <img class="user-avatar" src=${user.picture}/>
                               <p class="user-name">${user.name}</p>
                               <p class="user-vote">Vote: </p>
                             </div>
-                          `)
-  })
-});
+                            `)
+      })
+    });
 
 
 $(document).ready(function() {

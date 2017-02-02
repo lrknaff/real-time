@@ -1,0 +1,50 @@
+body {
+  box-sizing: border-box;
+  background: #484848;
+  font-family: monospace;
+}
+
+p {
+  color: white;
+}
+
+.poll {
+  background: linear-gradient(#4ECDC4, #556270);
+  width: 80%;
+  height: 320px;
+  position: relative;
+  margin: 20px auto;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+input, label {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  width: 80%;
+}
+
+input {
+  background: white;
+  margin-bottom: 20px;
+  margin-top: 27px;
+  border: none;
+  height: 45px;
+  padding: 7px;
+}
+
+.response-1, .response-2, .response-3 {
+  box-shadow:inset 0 0 1px #000;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+h2 {
+  text-align: center;
+  padding-top: 25px;
+  font-size: 30px;
+  width: 80%;
+  margin: 10px auto;
+}
