@@ -62,6 +62,7 @@ $(document).ready(function() {
      $('.poll').show();
      $('.connection-count').show();
      $('.user-list').show();
+     $('.vote-list').show();
   };
 
   var logout = function() {

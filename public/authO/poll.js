@@ -1,10 +1,9 @@
 const socket = io();
 const pollId = window.location.pathname.split("/")[2]
 
-let list = JSON.parse(localStorage.getItem('userList'))
-let reducedList = _.uniqBy(list, 'user_id')
-let individualUser = JSON.parse(localStorage.getItem('userList'))
-console.log(individualUser)
+let list = _.uniqBy(JSON.parse(localStorage.getItem('userList')), 'user_id')
+console.log(list)
+let individualUser = _.uniqBy(JSON.parse(localStorage.getItem('userList')), 'user_id')
 
 $.get(`/api/poll/${pollId}`, function(data) {
   data.forEach((poll) => {
@@ -23,7 +22,7 @@ socket.on('voteCast', (vote) => {
   let userVote = individualUser[0].user_id
   $('.your-vote').text(`Your vote: ${vote[userVote]}`)
   console.log(vote)
-  $('body').append(`<div>${vote}</div>`)
+  $('.vote-list').append(`<div>${vote}</div>`)
 });
 
 socket.on('usersConnected', (count) => {
