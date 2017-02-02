@@ -22,7 +22,12 @@ socket.on('voteCast', (vote) => {
   let userVote = individualUser[0].user_id
   $('.your-vote').text(`Your vote: ${vote[userVote]}`)
   console.log(vote)
-  $('.vote-list').append(`<div>${vote}</div>`)
+  $('.vote-list').empty()
+  for(var key in vote) {
+    if(vote.hasOwnProperty(key)) {
+      $('.vote-list').append(`<p>${userVote[userVote]}</p>`)
+    }
+  }
 });
 
 socket.on('usersConnected', (count) => {
