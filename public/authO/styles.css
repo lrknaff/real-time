@@ -52,3 +52,8 @@ h2 {
   width: 80%;
   margin: 10px auto;
 }
+
+img {
+  width: 75px;
+  border-radius: 50%;
+}

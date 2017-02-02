@@ -8,10 +8,9 @@ const md5 = require('md5');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.locals.votes = {};
-app.locals.users = [];
 const votes = {};
 const users = [];
+const individualUser = [];
 app.locals.polls = [];
 
 
@@ -63,20 +62,23 @@ const io = socketIo(server);
 
 io.on('connection', (socket) => {
   console.log('A user has connected.',
-io.sockets.sockets);
+io.engine.clientsCount);
 
   io.sockets.emit('usersConnected', io.engine.clientsCount);
 
   socket.on('message', (channel, message) => {
     if(channel === "voteCast") {
-      votes[socket.id] = message;
+      votes[individualUser.user_id] = message;
       io.sockets.emit('voteCast', votes)
-      console.log('votes', votes)
     }
     if(channel === "userInformation") {
-      users.push({user_id: message.user_id, name: message.name, picture: message.picture})
+      console.log(message.clientID)
+      users.push({ user_id: message.clientID, name: message.name, picture: message.picture })
       io.sockets.emit('userList', users)
-      console.log('users', users)
+    }
+    if(channel === "individualUser") {
+      individualUser[0] = ({user_id: message.clientID, name: message.name})
+      socket.emit('user', individualUser)
     }
   });
 

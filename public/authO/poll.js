@@ -18,14 +18,19 @@ socket.on('usersConnected', (count) => {
   $('.connection-count').text(`Voters: ${count}`);
 });
 
+socket.on('individualUser', (individualUser) => {
+  localStorage.set('user', individualUser)
+});
+
 socket.on('voteCast', (vote) => {
   $('.your-vote').text(`Your vote: ${Object.values(vote)[0]}`)
 });
 
 socket.on('userList', (users) => {
+    console.log(users)
     users.forEach((user) => {
       $('.user-list').html(`
-                            <div id=${user.user_id}class="user">
+                            <div id=${user.user_id} class="user">
                               <img class="user-avatar" src=${user.picture}/>
                               <p class="user-name">${user.name}</p>
                               <p class="user-vote">Vote: </p>

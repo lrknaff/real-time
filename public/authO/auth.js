@@ -33,6 +33,8 @@ $(document).ready(function() {
       localStorage.setItem('id_token', authResult.idToken);
       // Display user information
       show_profile_info(profile);
+      socket.send('individualUser', profile);
+      socket.send('userInformation', profile);
     });
   });
 
@@ -47,6 +49,7 @@ $(document).ready(function() {
         // Display user information
         show_profile_info(profile);
         socket.send('userInformation', profile);
+        socket.send('individualUser', profile);
         console.log(profile)
       });
     }
