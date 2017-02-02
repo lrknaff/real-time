@@ -23,12 +23,10 @@ socket.on('voteCast', (vote) => {
   $('.your-vote').text(`Your vote: ${vote[userVote]}`)
   $('.vote-list').empty()
   for(var key in vote) {
-    console.log(vote)
     let voteId = Object.keys(vote)[0]
-    console.log(voteId)
-    console.log(_.filter(list, ['user_id', voteId]))
+    let user = _.filter(list, ['user_id', voteId])
     if(vote.hasOwnProperty(key)) {
-      $('.vote-list').append(`<p>${list[voteId[0]].name}${vote[userVote]}</p>`)
+      $('.vote-list').append(`<p>${user[0].name}: ${vote[userVote]}</p>`)
     }
   }
 });
