@@ -12,9 +12,11 @@ const votes = {};
 const users = [];
 app.locals.poll = {};
 
-app.use('/poll', express.static(path.join(__dirname, 'public')));
+app.get('/', (req, res) => {
+  res.redirect('/poll')
+});
 
-// app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/poll', express.static(path.join(__dirname, 'public')));
 
 app.use('/login', express.static(path.join(__dirname, 'public/authO')));
 
@@ -68,7 +70,7 @@ io.on('connection', (socket) => {
       console.log('votes', votes)
     }
     if(channel === "userInformation") {
-      users.push({name: message.name, picture: message.picture})
+      users.push({user_id: message.user_id, name: message.name, picture: message.picture})
       io.sockets.emit('userList', users)
       console.log('users', users)
     }

@@ -6,9 +6,7 @@ $.get(`/api/poll/${pollId}`, function(data) {
   const { question, response_1, response_2, response_3 } = data
 
   if(!question) {
-    $('.poll').prepend(`
-                      <h2>Error Retrieving Poll</h2>
-                      `)
+    $('.question').text('Error Retrieving Poll')
   } else {
     $('.question').text(question);
     $('.choice1').val(response_1);
@@ -28,7 +26,7 @@ socket.on('voteCast', (vote) => {
 socket.on('userList', (users) => {
     users.forEach((user) => {
       $('.user-list').html(`
-                            <div class="user">
+                            <div id=${user.user_id}class="user">
                               <img class="user-avatar" src=${user.picture}/>
                               <p class="user-name">${user.name}</p>
                               <p class="user-vote">Vote: </p>
