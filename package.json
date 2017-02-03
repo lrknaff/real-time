@@ -4,7 +4,7 @@
   "description": "WebSockets and AuthO",
   "main": "server.js",
   "scripts": {
-    "test": "test",
+    "test": "mocha",
     "start": "nodemon server.js"
   },
   "repository": {
@@ -27,6 +27,7 @@
     "passport": "^0.3.2",
     "passport-auth0": "^0.6.0",
     "pg": "^6.1.2",
+    "request": "^2.79.0",
     "socket.io": "^1.7.2",
     "sqlite3": "^3.1.8"
   },
