@@ -1,5 +1,5 @@
 #Real Time
->a real-time chat app that uses client side security, WebSockets and jQuery.
+>a real-time voting app that uses client side security, WebSockets and jQuery.
 
 ##Built With:
 * jQuery
