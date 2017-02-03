@@ -2,7 +2,6 @@ const socket = io();
 const pollId = window.location.pathname.split("/")[2]
 
 let list = _.uniqBy(JSON.parse(localStorage.getItem('userList')), 'user_id')
-console.log(list)
 let individualUser = _.uniqBy(JSON.parse(localStorage.getItem('userList')), 'user_id')
 
 $.get(`/api/poll/${pollId}`, function(data) {

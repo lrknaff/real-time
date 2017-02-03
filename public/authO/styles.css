@@ -11,7 +11,6 @@ p {
 .poll {
   background: linear-gradient(#4ECDC4, #556270);
   width: 80%;
-  height: 350px;
   position: relative;
   margin: 20px auto;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
@@ -19,6 +18,7 @@ p {
 
 .your-vote {
   text-align: center;
+  padding-bottom: 15px;
 }
 
 input, label {
