@@ -2,10 +2,14 @@
 >a real-time voting app that uses client side security, WebSockets and jQuery.
 
 ##Built With:
+* Node.js
+* Express.js
+* JavaScript
 * jQuery
-* AuthO
+* Lodash
+* Auth0
 * WebSockets
-* Css
+* HTML/CSS
 
 ##View
 [Real Time](https://real-time-laceyk.herokuapp.com/)
